@@ -22,6 +22,7 @@ const App = () => {
   const [place, setPlace] = useState("")
   const [responsePlaces, setResponsePlaces] = useState<Place[]>([])
   const [selectedPlace, setSelectedPlace] = useState<Place>()
+  const [currentWeather, setCurrentWeather] = useState<CurrentWeather>()
 
   const searchPlace = () => {
     if(place.length === 0) return
@@ -34,7 +35,7 @@ const App = () => {
     if(selectedPlace === undefined) return
 
     axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${selectedPlace.latitude}&longitude=${selectedPlace.longitude}&current_weather=true`)
-    .then(response => console.log(response.data))
+    .then(response => setCurrentWeather(response.data.current_weather))
   },[selectedPlace])
 
   return (
@@ -60,22 +61,18 @@ const App = () => {
         selectedPlace &&
         <div>
           Selected place: {selectedPlace.name}
+
+          {
+            currentWeather &&
+            <div>
+              <div>Temperature: {currentWeather.temperature}°C</div>
+              <div>Wind direction: {currentWeather.winddirection}°</div>
+              <div>{currentWeather.is_day === 1 ? "🌞":"🌛"}</div>
+            </div>
+          }
+
         </div>
       }
-
-
-
-      Feels like
-
-      Humidity
-
-      Wind
-
-      Precipitation
-
-      Daily forecast
-
-      Hourly forecast
     </div>
   )
 }
