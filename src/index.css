@@ -25,3 +25,11 @@
   margin: 0;
   padding: 0;
 }
+
+.responseWrapper{
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
