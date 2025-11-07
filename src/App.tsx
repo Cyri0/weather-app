@@ -60,13 +60,17 @@ const App = () => {
       {
         selectedPlace &&
         <div>
-          Selected place: {selectedPlace.name}
+          <i className="fa-solid fa-location-dot"></i> {selectedPlace.name}
 
           {
             currentWeather &&
             <div>
-              <div>Temperature: {currentWeather.temperature}°C</div>
-              <div>Wind direction: {currentWeather.winddirection}°</div>
+              <div><i className="fa-solid fa-temperature-low"></i> {currentWeather.temperature}°C</div>
+              <div><i className="fa-solid fa-wind"></i>
+                <div style={{display: "inline-block", rotate: currentWeather.winddirection+"deg"}}>
+                  <i className="fa-solid fa-arrow-up"></i>
+                </div>
+              </div>
               <div>{currentWeather.is_day === 1 ? "🌞":"🌛"}</div>
             </div>
           }
